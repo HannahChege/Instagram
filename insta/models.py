@@ -34,9 +34,9 @@ class Image (models.Model):
         ordering = ('-pub_date',)
     def save_image(self):
         self.save() 
-#     @classmethod
-#     def update_caption(cls,update):
-#         pass
+    @classmethod
+    def update_caption(cls,update):
+        pass
 #     def delete_image(self):
 #         self.delete()    
 #     def display_images(cls):
