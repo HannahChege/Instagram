@@ -10,9 +10,9 @@ def instagram(request):
     image = Image.display_images
     return render(request,'instagram.html',{"image":image})
 
-# def image(request,image_id):
-#     try:
-#         image = Image.objects.get(id = image_id)
-#     except DoesNotExist:
-#         raise Http404()
-#     return render(request,"all-insta/image.html", {"image":image})
+def image(request,image_id):
+    try:
+        image = Image.objects.get(id = image_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"all-insta/image.html", {"image":image})
