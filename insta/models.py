@@ -23,7 +23,7 @@ class Profile(models.Model):
         return profile   
 
 class Image (models.Model):
-    # image = ImageField(upload_to = 'insta/')
+    image = models.ImageField(upload_to = 'insta/', default='No image')
     image_name = models.CharField(max_length =500)
     image_caption = HTMLField(blank=True)
     # likes = models.ManyToManyField(likes)
