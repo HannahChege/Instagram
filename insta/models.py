@@ -9,8 +9,8 @@ class Profile(models.Model):
     bio = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-#     def save_profile(self):
-#         self.save() 
+    def save_profile(self):
+        self.save() 
 
 #     @classmethod
 #     def update_profile(cls,update):
