@@ -30,10 +30,10 @@ class Image (models.Model):
     # comment = models.ManyToManyField(comment)
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True, null=True) 
-#     class Meta:
-#         ordering = ('-pub_date',)
-#     def save_image(self):
-#         self.save() 
+    class Meta:
+        ordering = ('-pub_date',)
+    def save_image(self):
+        self.save() 
 #     @classmethod
 #     def update_caption(cls,update):
 #         pass
