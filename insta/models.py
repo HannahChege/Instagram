@@ -39,9 +39,9 @@ class Image (models.Model):
         pass
     def delete_image(self):
         self.delete()    
-#     def display_images(cls):
-#         images=cls.objects.all()
-#         return images  
+    def display_images(cls):
+        images=cls.objects.all()
+        return images  
 # class Like(models.Model):
 #     name = models.CharField(max_length =30)
 
