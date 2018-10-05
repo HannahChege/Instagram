@@ -15,8 +15,8 @@ class Profile(models.Model):
     @classmethod
     def update_profile(cls,update):
         pass
-#     def delete_profile(self):
-#         self.delete()  
+    def delete_profile(self):
+        self.delete()  
 #     @classmethod
 #     def search_by_profile(cls,name):
 #         profile = Profile.objects.filter(profile__insta_profile__icontains=search_term)
