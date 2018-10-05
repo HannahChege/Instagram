@@ -37,8 +37,8 @@ class Image (models.Model):
     @classmethod
     def update_caption(cls,update):
         pass
-#     def delete_image(self):
-#         self.delete()    
+    def delete_image(self):
+        self.delete()    
 #     def display_images(cls):
 #         images=cls.objects.all()
 #         return images  
