@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
 # # Create your models here.
-# class Profile(models.Model):
-#     prof_image = models.ImageField(upload_to='insta/', blank=True)
-#     bio = models.TextField()
-#     pub_date = models.DateTimeField(auto_now_add=True)
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+class Profile(models.Model):
+    prof_image = models.ImageField(upload_to='insta/', blank=True)
+    bio = models.TextField()
+    pub_date = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 #     def save_profile(self):
 #         self.save() 
 
