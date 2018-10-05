@@ -12,7 +12,7 @@ class Profile(models.Model):
     def save_profile(self):
         self.save() 
 
-#     @classmethod
+    @classmethod
 #     def update_profile(cls,update):
 #         pass
 #     def delete_profile(self):
