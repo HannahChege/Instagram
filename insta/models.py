@@ -17,10 +17,10 @@ class Profile(models.Model):
         pass
     def delete_profile(self):
         self.delete()  
-#     @classmethod
-#     def search_by_profile(cls,name):
-#         profile = Profile.objects.filter(profile__insta_profile__icontains=search_term)
-#         return profile   
+    @classmethod
+    def search_by_profile(cls,name):
+        profile = Profile.objects.filter(profile__insta_profile__icontains=search_term)
+        return profile   
 
 # class Image (models.Model):
 #     image = models.ImageField(upload_to = 'insta/', default='No image')
