@@ -13,8 +13,8 @@ class Profile(models.Model):
         self.save() 
 
     @classmethod
-#     def update_profile(cls,update):
-#         pass
+    def update_profile(cls,update):
+        pass
 #     def delete_profile(self):
 #         self.delete()  
 #     @classmethod
