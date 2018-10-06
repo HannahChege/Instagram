@@ -23,7 +23,7 @@ class Profile(models.Model):
         return profile   
 
 class Image (models.Model):
-    image = models.ImageField(upload_to = 'insta/', default='No image')
+    image = models.ImageField(upload_to = 'instas/', default='No image')
     image_name = models.CharField(max_length =500)
     image_caption = HTMLField(blank=True)
     # likes = models.ManyToManyField(likes)
@@ -34,6 +34,14 @@ class Image (models.Model):
         ordering = ('-pub_date',)
     def save_image(self):
         self.save() 
+    @classmethod
+    def get_all_images(cls):
+        all_images = Image.objects.all()
+        return all_images 
+    @classmethod
+    def get_image_by_id(cls, id):
+        an_image = Image.objects.get(id=id)
+        return an_image       
     @classmethod
     def update_caption(cls,update):
         pass
