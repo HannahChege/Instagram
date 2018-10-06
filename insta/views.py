@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required
 # # Create your views here.
 @login_required(login_url='/accounts/login/')
 def instagram(request):
-    image = Image.display_images
-    return render(request,'instagram.html',{"image":image})
+    images = Image.object.all()
+    return render(request,'instagram.html',{"images":image})
 
 def image(request,image_id):
     try:
