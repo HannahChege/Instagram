@@ -16,10 +16,10 @@ from django.contrib.auth.decorators import login_required
 # # Create your views here.
 @login_required(login_url='/accounts/login/')
 def instagram(request):
-    images = Image.get_all_images()
+    images = Image.objects.all()
     # profiles = Profile.objects.all()
     profileimage=  User.objects.all()
-    return render(request,'instagram.html',{"images":image})
+    return render(request,'instagram.html',{"images":images})
 
 
 def signup(request):

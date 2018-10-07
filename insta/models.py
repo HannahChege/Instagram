@@ -65,7 +65,7 @@ class Image (models.Model):
 
     @classmethod
     def get_all_images(cls):
-        images = cls.objects.all()
+        images = Image.objects.all()
         return images 
     
     @classmethod
