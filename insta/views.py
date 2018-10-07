@@ -17,6 +17,8 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/accounts/login/')
 def instagram(request):
     images = Image.get_all_images()
+    # profiles = Profile.objects.all()
+    profileimage=  User.objects.all()
     return render(request,'instagram.html',{"images":image})
 
 
@@ -76,6 +78,25 @@ def new_image(request):
     else:
         form = NewImageForm()
     return render(request, 'new_image.html', {"form": form})
+
+@login_required(login_url='/accounts/login/')
+def upload_image(request):
+        profile = Profile.objects.all()
+        form = ImageForm()
+        for profile in profile:
+            if profile.user.id == request.user.id:
+                if request.method == 'POST':
+                    form = ImageForm(request.POST, request.FILES)
+                    if form.is_valid():
+                        upload =form.save(commit=False)
+                        upload.profile = request.user
+                        upload.profile_det = profile
+                        upload.save()
+                        return redirect('profile', username=request.user)
+                else:
+                    form = ImageForm()
+
+        return render(request, 'upload.html',{'form':form})    
 def image(request,image_id):
     try:
         image = Image.objects.get(id = image_id)
