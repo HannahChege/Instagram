@@ -1,12 +1,12 @@
 # TITLE
 INSTAGRAM
-#BUILT BY
+# BUILT BY
  HANNNAH NJERI
-#DESCRIPTION
+# DESCRIPTION
 This is a Instagram clone application that is used to display images.
 The application is build with Django Framework in Pthyon.
 
-#USER STORIES
+# USER STORIES
 As a user of the application you should be able to:
 
 `Sign in to the application to start using.
@@ -22,7 +22,7 @@ TECHNOLOGIES USED
 - JavaScript
 - Postgressql
 - Heroku
-#Prerequisites 
+# Prerequisites 
 `python3.6 pip virtualenv 
 `Cloning In your terminal:
 
