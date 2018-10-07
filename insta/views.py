@@ -79,6 +79,20 @@ def new_image(request):
         form = NewImageForm()
     return render(request, 'new_image.html', {"form": form})
 
+
+def search_results(request):
+
+    if 'profile' in request.GET and request.GET["profile"]:
+        search_term = request.GET.get("profile")
+        searched_profiles = Profile.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'all-insta/search.html',{"message":message,"profiles": searched_profiles})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'all-news/search.html',{"message":message})
+
 @login_required(login_url='/accounts/login/')
 def upload_image(request):
         profile = Profile.objects.all()
@@ -96,7 +110,8 @@ def upload_image(request):
                 else:
                     form = ImageForm()
 
-        return render(request, 'upload.html',{'form':form})    
+        return render(request, 'upload.html',{'form':form}) 
+
 def image(request,image_id):
     try:
         image = Image.objects.get(id = image_id)

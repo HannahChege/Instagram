@@ -46,7 +46,7 @@ class Profile(models.Model):
 
 class Image (models.Model):
     image_name = models.CharField(max_length =50)
-    image = models.ImageField(upload_to = 'instas/', default='No image')
+    image = models.ImageField(upload_to = 'images/', default='No image')
     image_caption = HTMLField(blank=True)
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True, null=True) 

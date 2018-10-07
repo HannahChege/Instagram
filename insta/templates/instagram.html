@@ -1,26 +1,20 @@
-{% extends 'all-insta/base.html' %}
+{% extends 'all-insta/base.html' %} -->
 {% block content %}
 <body>
-{% for insta_item in images %}
-<div class="container-fluid" id="container">   
-              <div id="image" class="p-1">
-                <div id="front" class="zoom">
-                  <div class="overlay">
-    <div class="col-md-4 col-md-4 col-md-4">
-      <div class="well">
-      <img src="{{insta_item.image.url}}" style="width: 100%" class="image" data-toggle="modal"  alt="Image" style="max-width:300px;">
-      </div>
+  <h1></h1>
+  {% for insta_item in insta %}
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <img src="{{insta_item.image_image.url}}" class="img-responsive" alt="Image">
     </div>
-                  </div>
-                </div>  
-              </div>        
+
+  </div>       
   {% endfor %}
-<h1>WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW</h1>     
-{% endblock %}
-</div>
+
 </body>
 <style>
-.image{
+  .image{
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s ease 0s;
     cursor: pointer;
@@ -34,4 +28,8 @@
     transition: .5s ease;
     transform: translateY(-7px);
   }
+
 </style>
+
+
+  {% endblock %}
