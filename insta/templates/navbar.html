@@ -21,8 +21,8 @@
         </div>
 
       </form>
-    <button>Profile</button>
-    <button>Upload</button>
+    <a href="{%url 'new-image'%}" style="color:purple;"><button>Upload</button></a>
+    <a href="/newprofile/" style="color:purple;"><button>Edit Profile</button></a>
     <span class="icons-section"><a class="fa fa-compass" href="#"></a><a class="fa fa-heart" href="#"></a>
           {% if user.is_authenticated %}
           

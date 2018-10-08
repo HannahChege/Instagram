@@ -7,9 +7,9 @@ from django.db.models.signals import post_save
 
 # # Create your models here.
 class Profile(models.Model):
+    username = models.TextField()
     bio = models.TextField()
-    image = models.ImageField( blank=True)
-    pub_date = models.DateTimeField(auto_now_add=True)
+    dp = models.ImageField( blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     def __str__(self):
         return self.user.username
@@ -47,9 +47,9 @@ class Profile(models.Model):
 class Image (models.Model):
     image_name = models.CharField(max_length =50)
     image = models.ImageField(upload_to = 'images/', default='No image')
-    image_caption = HTMLField(blank=True)
-    profile = models.ForeignKey(User, on_delete=models.CASCADE)
-    pub_date = models.DateTimeField(auto_now_add=True, null=True) 
+    image_caption = models.TextField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    posted_time = models.DateTimeField(auto_now=True) 
     
     def save_image(self):
         self.save() 
@@ -82,13 +82,29 @@ class Image (models.Model):
         images=cls.objects.all()
         return images 
      
-# class Like(models.Model):
-#     name = models.CharField(max_length =30)
 
-#     def __str__(self):
-#         return self.name
-# class Comment(models.Model):
-#     name = models.CharField(max_length =30)
+class Comments(models.Model):
+       """
+       Class that contains comments details
+       """
+       comment = HTMLField()
+       posted_date = models.DateTimeField(auto_now=True)
+       image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
+       user = models.ForeignKey(User, on_delete=models.CASCADE,null="True")
 
-#     def __str__(self):
-#         return self.name
+       def __str__(self):
+               return self.comment
+
+       class Meta:
+               ordering = ['posted_date']
+
+       def save_comment(self):
+               self.save()
+
+       def del_comentm(self):
+               self.delete()
+
+       @classmethod
+       def get_comments_by_image_id(cls, image):
+               comments = Comments.objects.get(image_id=image)
+               return comments

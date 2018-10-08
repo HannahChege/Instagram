@@ -1,7 +1,7 @@
 from django.http  import HttpResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
-from .forms import SignupForm,NewImageForm
+from .forms import SignupForm,NewImageForm,ProfileForm,CommentsForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -10,17 +10,21 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 import datetime as dt
-from .models import Image
+from .models import Image,Profile,Comments
 from django.contrib.auth.decorators import login_required
+from friendship.models import Friend, Follow, Block
 
 # # Create your views here.
 @login_required(login_url='/accounts/login/')
 def instagram(request):
     images = Image.objects.all()
     print(images)
-    # profiles = Profile.objects.all()
+    profiles = Profile.objects.all()
+    people = Follow.objects.following(request.user)
+    comments = Comments.objects.all()
     profileimage=  User.objects.all()
-    return render(request,'instagram.html',{"images":images})
+    
+    return render(request,'instagram.html',{"images":images, "profiles":profiles , "people":people,"comments":comments})
 
 
 def signup(request):
@@ -119,3 +123,43 @@ def image(request,image_id):
     except DoesNotExist:
         raise Http404()
     return render(request,"all-insta/image.html", {"image":image})
+
+
+def profile(request, user_id):
+    """
+    Function that enables one to see their profile
+    """
+    title = "Profile"
+    images = Image.get_image_by_id(id= user_id).order_by('-posted_on')
+    profiles = User.objects.get(id=user_id)
+    users = User.objects.get(id=user_id)
+    follow = len(Follow.objects.followers(users))
+    following = len(Follow.objects.following(users))
+    people = Follow.objects.following(request.user)
+    return render(request, 'profile/profile.html',{'title':title, "images":images,"follow":follow, "following":following,"profiles":profiles,"people":people})
+
+def new_profile(request):
+    current_user = request.user
+    image= Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.user = current_user
+            image.save()
+        return redirect('instagram')
+
+    else:
+        form = ProfileForm()
+    return render(request, "all-insta/profile.html", {"form":form,"image":image}) 
+
+def add_comment(request, image_id):
+   images = get_object_or_404(Image, pk=image_id)
+   if request.method == 'POST':
+       form = CommentsForm(request.POST)
+       if form.is_valid():
+           comment = form.save(commit=False)
+           comment.user = request.user
+           comment.image = images
+           comment.save()
+   return redirect('instagram')

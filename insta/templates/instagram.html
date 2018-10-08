@@ -25,10 +25,38 @@
 
     <div class="row">
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <p> {{ request.user }} </p> <br> <p> {{ image.image_name }} </p>
-        <img width="100%" style="" src="{{image.image.url}}" class="img-responsive" alt="Image">
-      </div>
+        <p> {{ image.profile.username }}
+          <p> {{image.profile.image.url}} </p> </p> <br> <p> {{ image.image_name }} </p> 
+        <img width="60%" style="" src="{{image.image.url}}" class="img-responsive" alt="Image">
+        <p> {{ image.profile.username }}
+        <p> {{image.image_caption}} 
 
+            <h5 class="display"><strong>Comments</strong>
+              <a class="view-more"></a>
+                        {% for comment in comments %}
+                         {% if comment.image_id == image.id %}
+                          <li class="comments"> {{ comment.user.username }} said:
+                            <span class="comment">{{ comment.comment }}</span>
+                          </li>
+                           {% else %}
+{% endif %}
+                        {% endfor %}
+
+                   <br>
+                   <br>
+                          <div class="comment-input-wrapper">
+                              <form action="{% url 'comment' image_id=image.id %}" method="post">
+                                  {% csrf_token %}
+                                  <input class="add-comment" name="comment" id="comment{{image.id}}" type="text" placeholder="Comment on this image....">
+                              </form>
+                          </div>
+                          <div class="hidden-data {{ image.pk }}" style="display: none;">
+                            <span class="image-pk">{{ image.pk }}</span>
+                          </div>
+
+
+          </h5>
+      </div>
     </div>       
     {% endfor %}
   {% else %}
