@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/accounts/login/')
 def instagram(request):
     images = Image.objects.all()
+    print(images)
     # profiles = Profile.objects.all()
     profileimage=  User.objects.all()
     return render(request,'instagram.html',{"images":images})

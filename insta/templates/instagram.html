@@ -1,35 +1,38 @@
 {% extends 'all-insta/base.html' %} -->
 {% block content %}
-<body>
-  <h1></h1>
-  {% for insta_item in insta %}
-
-  <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <img src="{{insta_item.image_image.url}}" class="img-responsive" alt="Image">
-    </div>
-
-  </div>       
-  {% endfor %}
-
-</body>
+{{ block.super }}
 <style>
-  .image{
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-    border-radius: 10px;
-    width: 100% !important;
-  }
-  .image:hover{
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    opacity: 0.7;
-    overflow: hidden;
-    transition: .5s ease;
-    transform: translateY(-7px);
-  }
+    .image{
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      transition: all 0.3s ease 0s;
+      cursor: pointer;
+      border-radius: 10px;
+      width: 100% !important;
+    }
+    .image:hover{
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      opacity: 0.7;
+      overflow: hidden;
+      transition: .5s ease;
+      transform: translateY(-7px);
+    }
+  
+  </style>
 
-</style>
+<div class="container">
+    {% if images %}
+    {% for image in images %}
 
+    <div class="row">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <p> {{ request.user }} </p> <br> <p> {{ image.image_name }} </p>
+        <img width="100%" style="" src="{{image.image.url}}" class="img-responsive" alt="Image">
+      </div>
+
+    </div>       
+    {% endfor %}
+  {% else %}
+    no images
+  {% endif %}
 
   {% endblock %}
