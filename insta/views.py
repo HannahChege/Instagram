@@ -145,18 +145,17 @@ def profile(request, user_id):
   
 def new_profile(request):
     current_user = request.user
+    profile=Profile.objects.get(user=request.user)
     image= Profile.objects.get(user=request.user)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES,instance=request.user.profile)
         if form.is_valid():
-            image = form.save(commit=False)
-            image.user = current_user
-            image.save()
-        return redirect('profile', current_user)
+            form.save()
+        return redirect('/')
 
     else:
         form = ProfileForm()
-    return render(request, "all-insta/profile.html", {"form":form,"image":image}) 
+    return render(request, "all-insta/edit_profile.html", {"form":form,"image":image}) 
 
 def add_comment(request, image_id):
    images = get_object_or_404(Image, pk=image_id)
