@@ -5,8 +5,7 @@ from .models import Image,Profile
 # Create your tests here.
 class ProfileTestClass(TestCase):
     def setUp(self):
-        self.profile = Profile(bio='Life is too short',image='',user='')
-        self.profile.save_profile()
+        self.profile = Profile(bio='Life is too short')
     def test_instances(self):
         self.assertTrue(isinstance(self.profile,Profile))
     def test_save_method(self):

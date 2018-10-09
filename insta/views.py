@@ -15,18 +15,8 @@ from django.contrib.auth.decorators import login_required
 from friendship.models import Friend, Follow, Block
 
 # # Create your views here.
+
 @login_required(login_url='/accounts/login/')
-def instagram(request):
-    images = Image.objects.all()
-    print(images)
-    profiles = Profile.objects.all()
-    people = Follow.objects.following(request.user)
-    comments = Comments.objects.all()
-    profileimage=  User.objects.all()
-    
-    return render(request,'instagram.html',{"images":images, "profiles":profiles , "people":people,"comments":comments,"profileimage":profileimage})
-
-
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -67,6 +57,17 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+@login_required(login_url='/accounts/login/')
+def instagram(request):
+    images = Image.objects.all()
+    print(images)
+    profiles = Profile.objects.all()
+    people = Follow.objects.following(request.user)
+    comments = Comments.objects.all()
+    profileimage=  User.objects.all()
+    
+    return render(request,'instagram.html',{"images":images, "profiles":profiles , "people":people,"comments":comments,"profileimage":profileimage})
 
 
 @login_required(login_url='/accounts/login/')
