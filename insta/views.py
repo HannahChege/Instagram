@@ -132,6 +132,7 @@ def profile(request, user_id):
     Function that enables one to see their profile
     """
     title = "Profile"
+
     images = Image.get_image_by_id(id= user_id).order_by('-posted_time')
     profiles = User.objects.get(id=user_id)
     user = User.objects.get(id=user_id)
@@ -140,6 +141,7 @@ def profile(request, user_id):
     people = Follow.objects.following(request.user)
     return render(request, 'all-insta/profile.html',{'title':title, "images":images,"follow":follow, "following":following,"profiles":profiles,"people":people})
 
+  
 def new_profile(request):
     current_user = request.user
     image= Profile.objects.get(user=request.user)
