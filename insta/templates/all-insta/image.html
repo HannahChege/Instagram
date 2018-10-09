@@ -1,0 +1,25 @@
+{%extends 'all-insta/base.html'%}
+
+ {% block content %}
+
+ <div class="container">
+
+   <div class="row">
+     <img src="{{profile.profile_image.url}}"  class="img-responsive" alt="">
+   </div>
+
+   <div class="row">
+     <h1 class="text-center">{{profile.bio}}</h1>
+   </div>
+
+   <div class="row">
+     <p>{{profile.post}}</p>
+   </div>
+
+   <div class="row">
+     <p>Posted {{profile.pub_date|timesince}} by {{profile.user.first_name}}</p>
+   </div>
+
+ </div>
+
+ {% endblock %}

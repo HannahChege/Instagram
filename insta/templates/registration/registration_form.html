@@ -1,0 +1,50 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="container">
+    <div class="row signup-page">
+        <div class="col-md-6 home">
+            <div class="lay">
+            </div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4_U1KSViHscBr2fo0MXEOMqPwgm6Jt6i00oHqBSrWsGMlJryU" height="550" alt="Phone images">
+        </div>
+        <div class="col-md-6 top-margin">
+            {% if form.errors %}
+                <p>Some information may be incorrect</p>
+            {% endif %}
+            <div class="signup-fields">
+                <div class="section">
+                    <div class="mylogo">
+                        <img src="" >
+                    </div>
+                    <div class="form-section" id="register">
+                        <form method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Sign up">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="section">
+                    <p class="log forgot">Have an account? <a href="/accounts/login/">Log in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- <style>
+  .title{
+    color: black !important;
+    font-family: billabong;
+    font-size: 65px;
+}
+@font-face {
+    font-family: billabong;
+    src:url('/static/fonts/Billabong.ttf');
+    font-weight: bold;
+}
+</style> -->
