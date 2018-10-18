@@ -88,18 +88,23 @@ def new_image(request):
     return render(request, 'new_image.html', {"form": form})
 
 
+@login_required(login_url='/accounts/login/')
 def search_user(request):
+   """
+   Function that searches for profiles based on the usernames
+   """
+   if 'username' in request.GET and request.GET["username"]:
+       name = request.GET.get("username")
+       searched_profiles = User.objects.filter(username__icontains=name)
+       message = f"{name}"
+       profiles = User.objects.all()
+       people = Follow.objects.following(request.user)
+       print(profiles)
+       return render(request, 'all-insta/search.html', {"message":message, "usernames":searched_profiles, "profiles":profiles,})
 
-    if 'profile' in request.GET and request.GET["profile"]:
-        search_term = request.GET.get("profile")
-        searched_profiles = Profile.search_by_username(search_term)
-        message = f"{search_term}"
-
-        return render(request, 'all-insta/search.html',{"message":message,"profiles": searched_profiles})
-
-    else:
-        message = "You haven't searched for any term"
-        return render(request, 'all-news/search.html',{"message":message})
+   else:
+       message = "You haven't searched for any term"
+       return render(request, 'all-insta/search.html', {"message":message})
 
 @login_required(login_url='/accounts/login/')
 def upload_image(request):
