@@ -7,10 +7,11 @@ from django.db.models.signals import post_save
 
 # # Create your models here.
 class Profile(models.Model):
-    username = models.TextField()
+    username = models.CharField(max_length =30)
     bio = models.TextField()
     dp = models.ImageField( blank=True)
     user = models.OneToOneField(User,related_name='profile', on_delete=models.CASCADE, primary_key=True)
+   
     def __str__(self):
         return self.user.username
 
