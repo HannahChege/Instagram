@@ -88,11 +88,11 @@ def new_image(request):
     return render(request, 'new_image.html', {"form": form})
 
 
-def search_results(request):
+def search_user(request):
 
     if 'profile' in request.GET and request.GET["profile"]:
         search_term = request.GET.get("profile")
-        searched_profiles = Profile.search_by_title(search_term)
+        searched_profiles = Profile.search_by_username(search_term)
         message = f"{search_term}"
 
         return render(request, 'all-insta/search.html',{"message":message,"profiles": searched_profiles})
