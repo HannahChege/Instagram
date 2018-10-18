@@ -1,2 +1,6 @@
 virtual/
 .env
+insta/__pycache__/
+.vscode
+insta/migrations/
+instagram/__pycache__/
