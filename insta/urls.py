@@ -11,7 +11,7 @@ urlpatterns=[
     url(r'^new/image$', views.new_image, name='new-image'),
     url(r'^profile/(\d+)', views.profile, name='profile'),
     url(r'^newprofile/', views.new_profile, name='new_profile'),
-    url(r'^search/', views.search_results, name='search_results'),  
+    url(r'^search/', views.search_user, name='search_user'),  
     url(r'^comment/(?P<image_id>\d+)', views.add_comment, name='comment'), 
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate, name='activate'),
